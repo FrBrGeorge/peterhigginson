@@ -1,0 +1,16 @@
+#!/bin/sh
+rm -rf peterhigginson.co.uk
+wget -k -r -np \
+	http://peterhigginson.co.uk/LMC/ \
+	http://peterhigginson.co.uk/LMC/help.html \
+	http://peterhigginson.co.uk/LMC/lmcgraphic_plh.gif \
+	http://peterhigginson.co.uk/LMC/pcMarker.png \
+	http://peterhigginson.co.uk/LMC/red.gif \
+	http://peterhigginson.co.uk/LMC/blue.gif \
+	http://peterhigginson.co.uk/LMC/blue1.gif \
+    \
+    https://peterhigginson.co.uk/ARMlite/
+pip install jsbeautifier
+for f in `find peterhigginson.co.uk -name \*.js`; do
+  js-beautify -r $f
+done
