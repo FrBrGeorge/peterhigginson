@@ -1,0 +1,596 @@
+﻿:root {
+     --col1: 20px;
+     --col2: 350px;
+     --col3: 480px;
+     --posMem: 700px;
+     --font1: Segoe UI,Open Sans,Verdana,Arial,Helvetica,sans-serif;
+     --font-size1:16pt;
+     --font2: monospace;
+     --font-size2: 10pt;
+     --width1: 48px;
+     --widthWord: 80px;
+     --width3: 320px;
+     --width4: 600px;
+     --widthMem: 410px;
+     --widthRegister: 120px;
+     --color1:  rgb(68, 114, 196);
+     --pixelSize: 5px;
+     --charSize: 10px;
+     --charFontSize: 14px;
+     --ur: block;
+     --flags: block;
+     --posOther: 130px;
+}
+
+body{
+    background-color: var(--color1);
+    font-size: var(--font-size2);
+    --displaySource: block;
+    --displayMemory: block;
+    --displayRegisters: block;
+    --displayCounter: block;
+    --displayInstruction: block;
+    --displayTitles: block;
+    --ioLeft: var(--col2);
+    --ioTop: 290px;
+    --ioWidth: 320px;
+    --processorLeft: var(--col2);
+    --processorTop: 0px;
+    --processorWidth: 320px;
+    --displaySave: block;
+    --displayEdit: block;
+    --displayStep: block;
+    --displaySlow: block;
+    --displayData: inline-block;
+}
+
+body.binary {
+    --widthWord: 250px;
+    --widthMem: 1090px;
+    --widthRegister: 290px;
+    --posMem: 870px;
+    --posOther: 300px;
+}
+
+body.profile-player {
+    --pixelSize: 10px;
+    --charSize: 20px;
+    --charFontSize: 28px;
+    --displaySource: none;
+    --displayMemory: none;
+    --displayRegisters: none;
+    --displayCounter: none;
+    --displayInstruction: none;
+    --displayTitles: none;
+    --ur: none;
+    --flags: none;
+    --ioLeft: var(--col2);
+    --ioTop: 10px;
+    --ioWidth: 640px;
+    --processorLeft: var(--col1);
+    --processorTop: 50px;
+    --processorWidth: 300px;
+    --displaySave: none;
+    --displayEdit: none;
+    --displayStep: none;
+    --displaySlow: none;
+    --displayData: none;
+}
+
+.title {
+    display: var(--displayTitles);
+    font-family: var(--font1);
+    font-size: var(--font-size1);
+    color: white;
+    padding-bottom: 5px;
+}
+#program > .title, #processor > .title, #io > .title, .memory > .title {
+    text-align: center; 
+}
+.value {
+    display: block;
+    font-family: var(--font2);
+    color: black;
+    background-color: white;
+}
+
+.value.highlighted {
+    background-color: orange;
+}
+
+#program {
+    display: block;
+    width: 300px;
+    position: absolute;
+    left: var(--col1);
+    top: 0px;
+}
+
+
+
+#program-controls {
+    display: block;
+    padding-top: 5px;
+}
+
+.running:not(.paused) #program-controls {
+    display: none;
+}
+
+#program button, button#clear {
+    border: 2px;
+    border-style: solid;
+    border-color: var(--color1);
+    display: block;
+    float: left;
+    color: var(--color1);
+    background-color: white;
+    font-family: var(--font1);
+    font-size: var(--font-size1);
+    margin-right: 10px;
+    padding: 0px 5px 0px 5px;
+}
+#read-input {
+    display: none;
+}
+#program-controls button:last-child {
+    margin-right: 0px;
+    padding-right: 3px;
+}
+
+ button:hover, button#clear:hover, button#load:hover {
+    border-color: white;
+}
+
+#program button#save {
+    display: var(--displaySave);
+}
+#program.edit button#edit {
+    display: none;
+}
+#program button#edit {
+    display: var(--displayEdit);
+}
+
+#program #submit, #program #revert {
+    display: none;
+}
+#program.edit #submit, #program.edit #revert {
+    display: block;
+}
+
+.edit #source {
+    padding: 0px;
+    height: 598px;
+}
+#source {
+    padding: 2px;
+    font-family: var(--font2);
+    font-size: 10pt;
+    background-color:white;
+    display: var(--displaySource);
+    height: 594px;
+}
+
+#source .comment {
+    color: green;
+	font-weight: 550;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+}
+#source .label {
+    font-weight: bold;
+}
+
+#source .line {
+    color: darkgrey;
+    float: left;
+    width: 29px;
+}
+
+#source .current, .word.current {
+    background-color: orange;
+}
+
+#source .breakpoint .line {
+    background-color: red;
+    color: black;
+}
+
+#source .error {
+    background-color: pink;
+}
+
+#source textarea {
+    resize: none;
+    font-family: var(--font2);
+    font-size: 10pt;
+    padding:2px; 
+    border:0; 
+    white-space:pre;
+    height: 594px;
+    width: 296px;
+}
+
+#source form {
+    height: 576px;
+}
+#processor {
+    display: block;
+    width: var(--processorWidth);
+    position: absolute;
+    left: var(--processorLeft);
+    top: var(--processorTop);
+    height: 100%;
+}
+
+    #registers {
+        display: var(--displayRegisters);
+        position: absolute;
+    }
+    #registers .title {
+        font-size: var(--font-size2);
+    }
+    .register {
+        display: block;
+        width: var(--widthRegister);
+    }
+    .register .name {
+        font-family: var(--font2);
+        color: white;
+        float: left;
+        width: 30px
+    }
+
+    .register .value {
+        display: block;
+        padding-right: 5px;
+        width: var(--widthWord);
+        float: left;
+        text-align: right;
+    }
+
+    .other {
+        display: block;
+        position: absolute;
+        left: var(--posOther);
+    }
+    .flags {
+        display: var(--flags);
+        position: absolute;
+        top: 205px;
+    }
+    .flags .title {
+        font-size: var(--font-size2);
+        position: absolute;
+        top: 13px;
+        width: 100px;
+    }
+
+
+    .flags .name, .flags .value {
+        position: absolute;
+        left: 80px;
+        letter-spacing: 2px;
+        font-family: var(--font2);
+        padding-left:2px;
+        padding-right:2px;
+        display: inline;
+    }
+    .flags .name {
+        top: 5px;
+        display: block;
+        color: white;
+     }
+
+     .flags .value {
+        top: 20px;
+     }
+
+     .instruction {
+         display: var(--displayInstruction);
+         position: absolute;
+         width: 200px;
+         top: 160px;
+     }
+
+     .instruction .title {
+         font-size: var(--font-size2);
+         float: left;
+         width: 50px;
+     }
+
+    .instruction .values {
+        display: block;
+        position: absolute;
+        top: 5px;
+        left: 80px;
+        width: 110px;
+    }
+
+    .instruction #ur {
+        display: var(--ur);
+    }
+
+     .counter {
+         display: var(--displayCounter);
+         position: absolute;
+         width: 140px;
+         top: 120px;
+     }
+     .counter .value {
+         position: absolute;
+         top: 5px;
+         left: 80px;
+         width: 110px;
+         text-align: right;
+     }
+
+     .counter .title {
+         font-size: var(--font-size2);
+     }
+ 
+#run-controls {
+    display: block;
+    position: absolute;
+    width: 190px;
+}
+#run-controls button, #irq button {
+    float: left;
+    padding: 0px;
+    width: 50px;
+    height: 50px;
+    margin: 3px;
+    opacity: 0.5;
+}
+
+.fa-gear#spinning, .fa-gear#static {
+    position: absolute;
+    top: 55px;
+    left: 115px;
+    display: none;
+    font-size:36px;
+    color: white;
+    padding: 10px;
+}
+.running:not(.paused) .fa-gear#spinning {
+    display: inline-block;
+}
+.paused .fa-gear#static {
+    display: inline-block;
+}
+
+button#step {
+    display: var(--displayStep);
+}
+
+button#slow {
+    display: var(--displaySlow);
+}
+
+/* Running modes button enabling */
+.ready #run, .ready #slow, .ready #step {
+    opacity: 1;
+}
+.ready #run img:hover, .ready #slow img:hover, .ready #step img:hover {
+    border: 1px solid white;
+}
+.running #pause, .running #stop, .running #slow, .running #step {
+    opacity: 1;
+}
+
+.running.slow #slow {
+    opacity: 0.5;
+}
+.running #pause img:hover, .running #stop img:hover, .running #slow img:hover, .running #step img:hover {
+    border: 1px solid white;
+}
+.paused #run, .paused #slow, .paused #step, .paused #stop {
+    opacity: 1;
+}
+.paused #run img:hover, .paused #slow img:hover, .paused #step img:hover, .paused #stop img:hover {
+    border: 1px solid white;
+}
+.slow #run, .slow #step, .slow #pause, .slow #stop{
+    opacity: 1;
+}
+.slow #run img:hover, .slow #step img:hover, .slow #pause img:hover, .slow #stop img:hover {
+    border: 1px solid white;
+}
+button#irq {
+    display: none;
+    position: absolute;
+    top: 220px;
+    left: 150px;
+    padding: 0px;
+    height: 50px;
+}
+.running #irq.enabled {
+  display: block;
+  opacity: 1;
+}
+.running #irq.enabled img:hover {
+    border: 1px solid white;
+}
+button {
+    border: none;
+}
+button img {
+    border: none;
+   width: 50px;
+    height: 50px;
+}
+
+#io {
+    display: block;
+    position: absolute;
+    top: var(--ioTop);
+    left: var(--ioLeft);
+    width: var(--ioWidth);
+}
+#pixels, #chars, #outer_console, #input, #input input {
+    display: block;
+    width: var(--ioWidth);
+    color: black;
+    font-family: var(--font2);
+}
+#input input {
+    border-style: solid;
+    border-color: red;
+    border-width: 2px;
+}
+#pixels, #chars {
+    position: absolute;
+margin-top: 8px;
+height: 240px;
+}
+
+#pixels div{
+    background-color: white;
+    float:left;
+}
+
+.pixels1 div {
+    height: var(--pixelSize);
+    width: var(--pixelSize);
+}
+
+.pixels2 div {
+    height: calc(var(--pixelSize)/2);
+    width: calc(var(--pixelSize)/2);
+}
+
+#chars {
+    background: none;
+    padding-left: 1px;
+}
+#chars div {
+    height: calc(var(--pixelSize)*3);
+    width: calc(var(--pixelSize)*2);
+    float: left;
+    font-size: var(--charFontSize);
+}
+#chars div:empty {
+    background:none;
+    z-index: 2;
+}
+
+#console {
+  resize: none;
+  height: 61px;
+  width: var(--ioWidth);
+  border: none;
+  padding: 0px;
+}
+
+#input {
+    background-color: white;
+    margin-top:5px;
+    height: 20px;
+  }
+
+.memory {
+    display: var(--displayMemory);
+    width: var(--widthMem);
+    position: absolute;
+    top: 0px;
+    left: var(--posMem);
+	padding-right: 16px;
+}
+.format {
+    background-color: white;
+    font-family: var(--font2);
+}
+.address {
+    display: block;
+color: white;
+font-family: monospace;
+float: left;
+}
+
+#page {
+    display: block;
+color: white;
+font-family: monospace;
+float: left;
+    color: black;
+    background: white;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-left: 12px;
+    margin-right: 10px;
+    width: 22px;
+}
+#page input {
+    font-family: var(--font2);
+    font-size: 10pt;
+    width:22px; 
+    height:12px;
+    padding: 0px;
+    border: none;
+}
+
+.row .address {
+    width: var(--width1);
+}
+
+.header .address, .word {
+    font-family: monospace;
+    width: var(--widthWord);
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: right;
+    float: left;
+}
+.page {
+    display: block;
+
+}
+
+.table, .row, .header  {
+    display: block;
+}
+
+.word {
+    color: black;
+    background: white;
+}
+
+#data {
+    display: var(--displayData);
+}
+
+#data {
+    margin-left: 48px;
+    margin-top: 10px;
+    font-size: 12pt;
+}
+
+button#clear {
+    float: right;
+    margin-right: 0;
+    margin-top: 10px;
+}
+.links {
+    position: absolute;
+    top: 645px;
+    font-family: var(--font1);
+    font-size: var(--font-size2);
+}
+.links a {
+    margin-right: 20px;
+}
+a:visited {
+    color: white;
+}
+
+.credits {
+    position: absolute;
+    top: 615px;
+    display: block;
+    font-family: var(--font1);
+    font-size: 12pt;
+    color: white;
+}
+
