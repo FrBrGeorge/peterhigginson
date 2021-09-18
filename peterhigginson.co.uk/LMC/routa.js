@@ -654,7 +654,7 @@ function assemble() {
 function updatePC(x) {
     pCounter = x;
     if (x < 10) x = '0' + x;
-    text("pc", x, 310, 206, 20, "black", "onclick", "openPC(this)")
+    text("pc", x, 310, 206, 16, "black", "onclick", "openPC(this)")
 }
 
 function openPC(inp) {
@@ -719,7 +719,7 @@ function updateACC(y) {
         if (y > -10) y = '-00' + (-y);
         else if (y > -100) y = '-0' + (-y)
     }
-    text("acc", y, 340, 337, 20, "black")
+    text("acc", y, 340, 337, 16, "black")
 }
 var instructions = ["HLT", "ADD", "SUB", "STA", "STO", "LDA", "BRA", "BRZ", "BRP", "DAT", "INP", "OUT", "OTC"];
 
@@ -793,7 +793,7 @@ function setAddress(x, y) {
         if (y > -10) y = '-00' + (-y);
         else if (y > -100) y = '-0' + (-y)
     }
-    text("a" + x, y, 472 + (x % 10) * 37, 60 + Math.floor(x / 10) * 42, 14, "black", "onclick", "openAddress(this)")
+    text("a" + x, y, 472 + (x % 10) * 37, 60 + Math.floor(x / 10) * 42, 11, "black", "onclick", "openAddress(this)")
 }
 
 function step3() {
