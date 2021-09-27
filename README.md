@@ -1,5 +1,5 @@
 # Peter Higginson emulators
-[Copy and fixes/improvements](https://raw.githubusercontent.com/FrBrGeorge/peterhigginson) of [Peter Higginson](http://peterhigginson.co.uk/Home.php) online JS emulators
+[Copy and fixes/improvements](https://frbrgeorge.github.io/peterhigginson) of [Peter Higginson](http://peterhigginson.co.uk/Home.php) online JS emulators
 * [Little man computer](peterhigginson.co.uk/LMC)
 * [ARM Lite](peterhigginson.co.uk/ARMlite)
 
